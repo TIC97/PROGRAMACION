@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC DE CADA PERSONA</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+        function saltarLineas() {
+
+            document.write("<br>");
+            document.write("<br>");
+            document.write("<br>");
+            document.write("<hr>")
+
+        };
+
+        function imprimir(frase) {
+
+            document.write("<big>" + (frase))
+
+        saltarLineas();
+
+        };
+
+
+        function calcularImc(peso,altura) {
+            
+            imc = peso/ (altura * altura);
+            
+            saltarLineas()
+
+            return imc;
+
+        }
+
+        // UNA FORMA DE TRABAJAR
+        /* imprimir("El IMC de Thomas y Agustin es de " + (calcularImc(78,1.75) + calcularImc(70,1.70))/ 2); 
+        */
+
+        var nombre = prompt("Indique su Nombre");
+
+        var peso = prompt(nombre + " informe su Peso");
+
+        var altura = prompt(nombre + " informe su Altura") ;
+        
+        imcCalculado = calcularImc(peso,altura);
+
+        imprimir(nombre + ", el IMC calculado es de " + imcCalculado )
+
+    </script>
+
+</body>
+</html>
