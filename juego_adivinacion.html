@@ -7,7 +7,10 @@
     <title>JUEGO DE ADIVINACION</title>
 </head>
 <body>
+
+    <h1>PROGRAMA DE ADIVINACION</h1>
     
+    <hr>
 
     <Script>
 
@@ -29,17 +32,16 @@
         };
 
 
-        var numeroPensado = parseInt(prompt("Ingresa el numero pensado"));
+        var numeroPensado = Math.round(Math.random()*20);
 
-        var numeroLanazado = parseInt(prompt("ingrese el numerop pesado"));
+        var numeroLanazado = parseInt(prompt("ingrese el numero pesado"));
 
 
         if (numeroPensado == numeroLanazado) {
             
             imprimir("Usted acerto");
 
-        };
-        if (numeroPensado != numeroLanazado) {
+        } else {
           
             imprimir("Usted erro el numero pensado es " + numeroPensado);  
 
