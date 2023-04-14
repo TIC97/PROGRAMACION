@@ -32,22 +32,35 @@
         };
 
 
-        var numeroPensado = Math.round(Math.random()*20);
+        var numeroPensado = Math.round(Math.random()*10);
 
-        var numeroLanazado = parseInt(prompt("ingrese el numero pesado"));
+        // var contador = 1;
+
+        var intentos = 3;
+
+        // while (contador <= intentos) {
+        while (contador <= 3) {    
+
+            var numeroLanzado = parseInt(prompt("ingrese el numero pesado 0 - 10"));
 
 
-        if (numeroPensado == numeroLanazado) {
+            if (numeroPensado == numeroLanzado) {
+                
+                alert("Usted acerto en el intento " + contador + " el numero pensado era " + numeroPensado);
+                
+            } else {
             
-            imprimir("Usted acerto");
+                imprimir("Usted erro " + contador + " el numero pensado era " + numeroPensado);  
 
-        } else {
-          
-            imprimir("Usted erro el numero pensado es " + numeroPensado);  
+            };
+            
+            contador++;
 
-        };
+         };
 
-         
+
+         imprimir("FIN");
+
     </Script>
 
 
