@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIRCULOS CON VIDA</title>
+</head>
+<body>
+
+    <h1>CIRCULOS CON VIDA</h1>
+
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+
+        let pantalla = document.querySelector("canvas");
+        let pincel = pantalla.getContext("2d");
+        // pincel.fillStyle = "lightgrey";       
+        // pincel.fillRect(0, 0, 600, 400);
+
+
+        function dibujarCircunferencia(x, y, radio) {
+            
+            pincel.fillStyle = "darkviolet";
+            pincel.beginPath();
+            pincel.arc(x, y, radio, 0, 2*Math.PI);
+            pincel.fill();
+        
+        }
+        
+        function limpiarPantalla() {
+            
+            pincel.clearRect(0, 0, 600, 400)
+            pincel.fillStyle = "lightgrey";       
+            pincel.fillRect(0, 0, 600, 400);
+
+        };
+
+        let x = 20;
+        let indice = 1;
+
+        function actualizarPantalla() {
+
+            limpiarPantalla();
+            dibujarCircunferencia(x, 20, 10);
+
+            x = x + indice;
+
+            if (x > 590) {
+            
+                indice = -1;
+            
+            } else if (x < 10) {
+            
+                indice = 1;
+            
+            }
+            console.log(x);
+        };
+
+        setInterval(actualizarPantalla,10);
+       
+
+        
+
+
+
+
+
+    </script>
+</body>
+</html>
