@@ -17,38 +17,65 @@
         pincel.fillStyle = 'grey';
         pincel.fillRect(0, 0, 600, 400);
 
+        // ***BARRAS DE COLORES 
+        pincel.fillStyle = "darkblue";
+        pincel.fillRect(5,5,50,50);
+        pincel.fillStyle = "darkred";
+        pincel.fillRect(60,5,50,50);
+        pincel.fillStyle = "darkgreen";
+        pincel.fillRect(115,5,50,50);
+        
+        let colores = ["darkblue","darkred","darkgreen"];
+        let indiceColor = 0;
+        
+        // ***FUNCION CAMBIAR DE COLOR
+        function cambiarColor(event) {            
+            indiceColor++;
+            
+            if (indiceColor >= colores.length) {
+                indiceColor = 0;
+            };
+            
+            console.log(colores[indiceColor]);
+            console.log("FUNCIONO");
+        }    
+        
+        pantalla.oncontextmenu = cambiarColor;
+        
         var puedoDibujar = false;
-
+        
+        
         function dibujarCirculo(evento) {
-
+            
             if(puedoDibujar) {
                 var x = evento.pageX - pantalla.offsetLeft;
                 var y = evento.pageY - pantalla.offsetTop;
-                pincel.fillStyle = 'blue';
+                pincel.fillStyle = colores[indiceColor];   // ***ACA TENDRIA QUE CAMBAIR DE COLOR 
                 pincel.beginPath();
                 pincel.arc(x, y, 5, 0, 2 * 3.14);
                 pincel.fill();
             }
-
+            
         }
-
+        
         pantalla.onmousemove = dibujarCirculo;
-
+        
         function habilitarDibujar() {
-
+            
             puedoDibujar = true;
         }
-
+        
         function deshabilitarDibujar() {
-
+            
             puedoDibujar = false;
         }
-
+        
+        
         pantalla.onmousedown = habilitarDibujar;
-
+        
         pantalla.onmouseup = deshabilitarDibujar;
-
-    </script>
+        
+        </script>
 
 </body>
 </html>
