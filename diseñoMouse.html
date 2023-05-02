@@ -9,72 +9,96 @@
 <body>
     
     <canvas width="600" height="400"></canvas>
-
+    
     <script>
         var pantalla = document.querySelector('canvas');
         var pincel = pantalla.getContext('2d');
-
+        
         pincel.fillStyle = 'grey';
         pincel.fillRect(0, 0, 600, 400);
-
-        // ***BARRAS DE COLORES 
-        pincel.fillStyle = "darkblue";
-        pincel.fillRect(5,5,50,50);
-        pincel.fillStyle = "darkred";
-        pincel.fillRect(60,5,50,50);
-        pincel.fillStyle = "darkgreen";
-        pincel.fillRect(115,5,50,50);
-        
-        let colores = ["darkblue","darkred","darkgreen"];
-        let indiceColor = 0;
-        
-        // ***FUNCION CAMBIAR DE COLOR
-        function cambiarColor(event) {            
-            indiceColor++;
-            
-            if (indiceColor >= colores.length) {
-                indiceColor = 0;
-            };
-            
-            console.log(colores[indiceColor]);
-            console.log("FUNCIONO");
-        }    
-        
-        pantalla.oncontextmenu = cambiarColor;
         
         var puedoDibujar = false;
+
+
+        // ***VARIABLES CUADRADOS DE COLORES 
+        let xRojo = 0;
+        let xVerde = 50;
+        let xAzul = 100;
         
+        let yCuadrados = 0;
+        let tamanhoCuadrados = 50;
+          
         
-        function dibujarCirculo(evento) {
+        function dibujarCirculo(x,y) {
             
             if(puedoDibujar) {
-                var x = evento.pageX - pantalla.offsetLeft;
-                var y = evento.pageY - pantalla.offsetTop;
-                pincel.fillStyle = colores[indiceColor];   // ***ACA TENDRIA QUE CAMBAIR DE COLOR 
+            
                 pincel.beginPath();
                 pincel.arc(x, y, 5, 0, 2 * 3.14);
                 pincel.fill();
+            
             }
+        };
+
+        function dibujarCuadrados(x,y,tamanho,color) {
+            
+            pincel.fillStyle = color;
+            pincel.fillRect(x, y, tamanho, tamanho);
+            pincel.fill();
+
+        };
+        
+        function dibujarPaletaColores() {
+            
+            dibujarCuadrados(xRojo,yCuadrados,tamanhoCuadrados,"red");
+            dibujarCuadrados(xVerde,yCuadrados,tamanhoCuadrados,"green");
+            dibujarCuadrados(xAzul,yCuadrados,tamanhoCuadrados,"blue");
             
         }
-        
+
         pantalla.onmousemove = dibujarCirculo;
         
         function habilitarDibujar() {
             
             puedoDibujar = true;
-        }
+        };
         
         function deshabilitarDibujar() {
             
             puedoDibujar = false;
+        };
+        
+        function puedeDisenharaArea(xCoordenada, yCordenada) {
+            
+            if ((xCoordenada) >= 0 && (xCoordenada < (3*tamanhoCuadrados + 5)) && (yCordenada >= 0 && yCordenada < (tamanhoCuadrados + 5))) {
+
+                return false;
+                
+            } else {
+                
+                return true;
+
+            }
+
         }
+        function capturarMovimientoDelMouse(event) {
+            
+            let x = event.pageX - pantalla.offsetLeft;
+            let y = event.pageY -pantalla.offsetTop;
+
+            if (puedeDisenharaArea(x,y)) {
+                
+                dibujarCirculo(x,y);
+
+            }
+        };
         
-        
+        pantalla.onmousemove = capturarMovimientoDelMouse;
         pantalla.onmousedown = habilitarDibujar;
-        
         pantalla.onmouseup = deshabilitarDibujar;
         
+        dibujarPaletaColores();
+
         </script>
 
 </body>
