@@ -27,12 +27,14 @@
         
         let yCuadrados = 0;
         let tamanhoCuadrados = 50;
+        let colorActual = "blue";
           
         
-        function dibujarCirculo(x,y) {
+        function dibujarCirculo(x,y,colorActual) {
             
             if(puedoDibujar) {
             
+                pincel.fillStyle = colorActual;
                 pincel.beginPath();
                 pincel.arc(x, y, 5, 0, 2 * 3.14);
                 pincel.fill();
@@ -50,9 +52,9 @@
         
         function dibujarPaletaColores() {
             
-            dibujarCuadrados(xRojo,yCuadrados,tamanhoCuadrados,"red");
-            dibujarCuadrados(xVerde,yCuadrados,tamanhoCuadrados,"green");
-            dibujarCuadrados(xAzul,yCuadrados,tamanhoCuadrados,"blue");
+            dibujarCuadrados(xRojo,yCuadrados,tamanhoCuadrados,'red');
+            dibujarCuadrados(xVerde,yCuadrados,tamanhoCuadrados,'green');
+            dibujarCuadrados(xAzul,yCuadrados,tamanhoCuadrados,'blue');
             
         }
 
@@ -84,20 +86,50 @@
         function capturarMovimientoDelMouse(event) {
             
             let x = event.pageX - pantalla.offsetLeft;
-            let y = event.pageY -pantalla.offsetTop;
+            let y = event.pageY - pantalla.offsetTop;
 
             if (puedeDisenharaArea(x,y)) {
                 
-                dibujarCirculo(x,y);
+                dibujarCirculo(x,y,colorActual);
 
             }
         };
+
+        function seleccionarColor(event) {
+            
+            let x = event.pageX - pantalla.offsetLeft;
+            let y = event.pageY - pantalla.offsetTop;
+
+            if (y > yCuadrados && y < (yCuadrados + tamanhoCuadrados)) {
+                if (x > xRojo && x < (xRojo + tamanhoCuadrados)) {
+                    
+                    colorActual = "red";
+                    console.log(colorActual);
+
+                }
+
+                } else if (x > xVerde && x < (xVerde + tamanhoCuadrados)) {
+                
+                colorActual = "green";
+                console.log(colorActual);
+
+                } else if (x > xAzul && x < (xAzul + tamanhoCuadrados)){
+
+                colorActual = "blue";
+                console.log(colorActual);
+
+                }
+        };
+
         
         pantalla.onmousemove = capturarMovimientoDelMouse;
         pantalla.onmousedown = habilitarDibujar;
         pantalla.onmouseup = deshabilitarDibujar;
         
         dibujarPaletaColores();
+
+        pantalla.onclick = seleccionarColor;
+
 
         </script>
 
